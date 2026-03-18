@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.mmcm.tradigital.controller.MainController">
+
+    <top>
+        <ToolBar>
+            <Label text="MMCM Tradigital - Catalog" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <TextField fx:id="searchField" promptText="Search..." />
+            <Button text="Search" onAction="#search" />
+            <Button text="Toggle Easy Mode" onAction="#toggleEasyMode" style="-fx-font-weight: bold;" />
+            <Button text="Admin" onAction="#openAdmin" />
+        </ToolBar>
+    </top>
+
+    <center>
+        <VBox spacing="10" style="-fx-padding: 10;">
+            <TableView fx:id="tblCatalog" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colSku" text="SKU" prefWidth="90"/>
+                    <TableColumn fx:id="colName" text="Name" prefWidth="220"/>
+                    <TableColumn fx:id="colCategory" text="Category" prefWidth="140"/>
+                    <TableColumn fx:id="colPrice" text="Price" prefWidth="100"/>
+                    <TableColumn fx:id="colStock" text="Stock" prefWidth="90"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="8">
+                <Label text="Quantity:" />
+                <Spinner fx:id="spnQty" editable="true" prefWidth="90" />
+                <Pane HBox.hgrow="ALWAYS" />
+                <Button text="Add to Cart" onAction="#addToCart" />
+                <Button text="Remove Selected" onAction="#removeSelectedLine" />
+                <Button text="Checkout" onAction="#checkout" />
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox spacing="12" style="-fx-padding: 10;">
+            <Label text="Cart Total:" />
+            <Label fx:id="lblCartTotal" text="₱0.00" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Label text="Signed in as:" />
+            <Label fx:id="lblUser" text="guest" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

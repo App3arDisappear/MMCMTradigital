@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.mmcm.tradigital.controller.LoginController">
+    <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+
+    <Text text="MMCM Tradigital" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <VBox spacing="5">
+        <Label text="Email:"/>
+        <TextField fx:id="txtEmail" promptText="Enter your email"/>
+    </VBox>
+
+    <VBox spacing="5">
+        <Label text="Password:"/>
+        <PasswordField fx:id="txtPassword" promptText="Enter your password"/>
+    </VBox>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Login" onAction="#handleLogin" prefWidth="80"/>
+        <Button text="Register" onAction="#handleRegister" prefWidth="80"/>
+    </HBox>
+
+    <Separator/>
+
+    <Button text="Continue as Guest" onAction="#handleGuest" style="-fx-background-color: transparent; -fx-text-fill: blue; -fx-underline: true;"/>
+</VBox>

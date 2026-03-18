@@ -6,18 +6,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
-
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/edu/mmcm/tradigital/fxml/main_view.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setTitle("MMCM Tradigital");
+        // Now loading the LOGIN view instead of the MAIN view
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/edu/mmcm/tradigital/fxml/login_view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("MMCM Tradigital - Login");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
 }

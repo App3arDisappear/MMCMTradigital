@@ -1,56 +1,34 @@
 package edu.mmcm.tradigital.repo;
 
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import edu.mmcm.tradigital.database.DatabaseConnection;
-import edu.mmcm.tradigital.model.User;
+import com.mongodb.client.model.Filters;
 import org.bson.Document;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.mongodb.client.model.Filters.eq;
+import edu.mmcm.tradigital.model.User;
+import edu.mmcm.tradigital.database.DatabaseConnection;
 
 public class UserRepository {
     private final MongoCollection<Document> collection;
 
     public UserRepository() {
-        this.collection = DatabaseConnection.getDatabase().getCollection("users");
+        collection = DatabaseConnection.getDatabase().getCollection("users");
     }
 
-    public void addUser(User user) {
-        Document doc = new Document("id", user.getId())
-                .append("name", user.getName())
-                .append("email", user.getEmail())
+    public void save(User user) {
+        Document doc = new Document("email", user.getEmail())
+                .append("password", user.getPassword())
                 .append("role", user.getRole());
         collection.insertOne(doc);
     }
 
-    public List<User> getAllUsers() {
-        List<User> users = new ArrayList<>();
-        try (MongoCursor<Document> cursor = collection.find().iterator()) {
-            while (cursor.hasNext()) {
-                Document doc = cursor.next();
-                users.add(new User(
-                        doc.getString("id"),
-                        doc.getString("name"),
-                        doc.getString("email"),
-                        doc.getString("role")
-                ));
-            }
+    public User findByEmail(String email) {
+        Document doc = collection.find(Filters.eq("email", email)).first();
+        if (doc != null) {
+            return new User(
+                    doc.getString("email"),
+                    doc.getString("password"),
+                    doc.getString("role")
+            );
         }
-        return users;
-    }
-
-    public void updateUser(User user) {
-        Document updatedDoc = new Document("id", user.getId())
-                .append("name", user.getName())
-                .append("email", user.getEmail())
-                .append("role", user.getRole());
-        collection.replaceOne(eq("id", user.getId()), updatedDoc);
-    }
-
-    public void deleteUser(String id) {
-        collection.deleteOne(eq("id", id));
+        return null;
     }
 }

@@ -1,53 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.mmcm.tradigital.controller.MainController">
+<VBox spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.mmcm.tradigital.controller.MainController">
+    <padding><Insets top="10" right="10" bottom="10" left="10"/></padding>
 
-    <top>
-        <ToolBar>
-            <Label text="MMCM Tradigital - Catalog" />
-            <Pane HBox.hgrow="ALWAYS" />
-            <TextField fx:id="searchField" promptText="Search..." />
-            <Button text="Search" onAction="#search" />
-            <Button text="Toggle Easy Mode" onAction="#toggleEasyMode" style="-fx-font-weight: bold;" />
-            <Button text="Admin" onAction="#openAdmin" />
-        </ToolBar>
-    </top>
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <TextField fx:id="searchField" promptText="Search Item Code or Name..." HBox.hgrow="ALWAYS"/>
+        <Button text="Search" onAction="#search"/>
+        <Button text="Toggle Easy Mode" onAction="#toggleEasyMode"/>
+        <Button fx:id="btnAdmin" text="Admin Panel" onAction="#openAdmin"/>
+    </HBox>
 
-    <center>
-        <VBox spacing="10" style="-fx-padding: 10;">
-            <TableView fx:id="tblCatalog" VBox.vgrow="ALWAYS">
-                <columns>
-                    <TableColumn fx:id="colSku" text="SKU" prefWidth="90"/>
-                    <TableColumn fx:id="colName" text="Name" prefWidth="220"/>
-                    <TableColumn fx:id="colCategory" text="Category" prefWidth="140"/>
-                    <TableColumn fx:id="colPrice" text="Price" prefWidth="100"/>
-                    <TableColumn fx:id="colStock" text="Stock" prefWidth="90"/>
-                </columns>
-            </TableView>
+    <TableView fx:id="tblCatalog" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colSku" text="Item Code" prefWidth="120"/>
+            <TableColumn fx:id="colName" text="Name" prefWidth="250"/>
+            <TableColumn fx:id="colCategory" text="Category" prefWidth="150"/>
+            <TableColumn fx:id="colPrice" text="Price" prefWidth="100"/>
+            <TableColumn fx:id="colStock" text="Stock" prefWidth="100"/>
+        </columns>
+    </TableView>
 
-            <HBox spacing="8">
-                <Label text="Quantity:" />
-                <Spinner fx:id="spnQty" editable="true" prefWidth="90" />
-                <Pane HBox.hgrow="ALWAYS" />
-                <Button text="Add to Cart" onAction="#addToCart" />
-                <Button text="Remove Selected" onAction="#removeSelectedLine" />
-                <Button text="Checkout" onAction="#checkout" />
-            </HBox>
-        </VBox>
-    </center>
+    <VBox fx:id="boxItemDetails" style="-fx-background-color: #f4f4f4; -fx-padding: 10; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;">
+        <Label text="Item Details:" style="-fx-font-weight: bold;"/>
+        <Label fx:id="lblItemDescription" text="Click an item in the table to see details here." wrapText="true"/>
+    </VBox>
 
-    <bottom>
-        <HBox spacing="12" style="-fx-padding: 10;">
-            <Label text="Cart Total:" />
-            <Label fx:id="lblCartTotal" text="₱0.00" />
-            <Pane HBox.hgrow="ALWAYS" />
-            <Label text="Signed in as:" />
-            <Label fx:id="lblUser" text="guest" />
+    <HBox spacing="20" alignment="CENTER_LEFT">
+        <HBox spacing="5" alignment="CENTER_LEFT">
+            <Label text="Quantity:"/>
+            <Spinner fx:id="spnQty" prefWidth="80"/>
         </HBox>
-    </bottom>
 
-</BorderPane>
+        <Region HBox.hgrow="ALWAYS" />
+
+        <HBox spacing="10">
+            <Button text="Add to Cart" onAction="#addToCart"/>
+            <Button text="Remove Selected" onAction="#removeSelectedLine"/>
+            <Button text="Checkout / Exit" onAction="#checkout" style="-fx-base: #add8e6;"/>
+        </HBox>
+    </HBox>
+
+    <HBox alignment="CENTER_LEFT">
+        <Label text="Cart Total: " style="-fx-font-weight: bold;"/>
+        <Label fx:id="lblCartTotal" text="₱0.00"/>
+    </HBox>
+</VBox>

@@ -1,34 +1,28 @@
 package edu.mmcm.tradigital.model;
-import java.time.LocalDate;
+
 import java.util.List;
+import java.util.Date;
+import java.util.UUID;
 
 public class Order {
     private String orderId;
-    private String userId;
-    private List<OrderLine> items;
-    private String orderType;
+    private String userEmail;
+    private List<Product> items;
     private double totalAmount;
-    private LocalDate orderDate;
-    private LocalDate dueDate;
-    private String status;
+    private Date orderDate;
 
-    public Order(String orderId, String userId, List<OrderLine> items, String orderType, double totalAmount, LocalDate orderDate, LocalDate dueDate, String status) {
-        this.orderId = orderId;
-        this.userId = userId;
+    public Order(String userEmail, List<Product> items, double totalAmount) {
+        // Automatically generates a random 8-character ID like "ORD-A1B2C3D4"
+        this.orderId = "ORD-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+        this.userEmail = userEmail;
         this.items = items;
-        this.orderType = orderType;
         this.totalAmount = totalAmount;
-        this.orderDate = orderDate;
-        this.dueDate = dueDate;
-        this.status = status;
+        this.orderDate = new Date();
     }
 
     public String getOrderId() { return orderId; }
-    public String getUserId() { return userId; }
-    public List<OrderLine> getItems() { return items; }
-    public String getOrderType() { return orderType; }
+    public String getUserEmail() { return userEmail; }
+    public List<Product> getItems() { return items; }
     public double getTotalAmount() { return totalAmount; }
-    public LocalDate getOrderDate() { return orderDate; }
-    public LocalDate getDueDate() { return dueDate; }
-    public String getStatus() { return status; }
+    public Date getOrderDate() { return orderDate; }
 }
